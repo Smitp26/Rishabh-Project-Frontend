@@ -42,15 +42,18 @@ export class LoginComponent {
 
   onSubmit() {
     console.log(this.loginForm.value);
-    localStorage.setItem("email", this.loginForm.value.email);
-    this.userService.login(this.loginForm.value).subscribe(({
-      next: (res => {
+    //localStorage.setItem("email", this.loginForm.value.email);
+    // localStorage.setItem("id",this.loginForm.value.id)
+    this.userService.login(this.loginForm.value).subscribe({
+      next: (res) => { // Remove the extra '(' before 'res'
         console.log(res);
+        this.userService.saveUserData(res.user);
+        //localStorage.setItem('email', this.loginForm.value.email);
         if (res.userId != null) {
           const user = {
             id: res.userId,
             role: res.userRole
-          }
+          } 
           console.log(user);
           StorageServiceService.saveToken(res.jwt);
           StorageServiceService.saveUser(user);
@@ -60,10 +63,10 @@ export class LoginComponent {
         else {
           this.toaster.error('Login Failed', 'Error');
         }
-      }),
+      },
       error: (err) => {
         this.toaster.error('Login Failed, Please check your credentials', 'Error');
       }
-    }))
+    });
   }
 }

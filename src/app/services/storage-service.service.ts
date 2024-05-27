@@ -19,14 +19,14 @@ export class StorageServiceService {
     window.localStorage.removeItem(USER);
     window.localStorage.setItem(USER,JSON.stringify(user));
   }
+  
+  static getUser(): any{
+    return JSON.parse(localStorage.getItem(USER)!);
+  }
+  
 
   static getToken(): string{
     return localStorage.getItem(TOKEN)!;
-
-  }
-
-  static getUser(): any{
-    return JSON.parse(localStorage.getItem(USER)!);
   }
 
   static getUserRole(): string{

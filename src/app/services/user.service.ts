@@ -42,6 +42,9 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  saveUserData(user: any): void {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
 
   sendOtp(email: string): Observable<any> {
     let params = new HttpParams().set('email', email);

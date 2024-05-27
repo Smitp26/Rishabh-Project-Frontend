@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,19 +10,60 @@ import { Router } from '@angular/router';
 
 export class AuthService {
 
-  private loggedIn = false;
+  constructor(private http: HttpClient) { }
 
-  isAuthenticated(): boolean{
-    return this.loggedIn;
+  // private loggedIn = false;
+  isLoggedIn = false;
+  loggedInEmployee: any = null;
+  email: any = '';
+  employeeId!: number;
+
+  // login(employee: any): void {
+  //   this.isLoggedIn = true;
+  //   this.loggedInEmployee = employee;
+  // }
+
+  // Simulate logout
+  logout(): void {
+    this.isLoggedIn = false;
+    this.loggedInEmployee = null;
   }
 
-  login(){
-    this.loggedIn = true;
+  login(employee: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8081/api/auth/login', employee).pipe(
+      tap(response => {
+        this.isLoggedIn = true;
+        this.loggedInEmployee = response;
+        
+        // this.employeeId = response.id;
+        // this.email = response.email;
+
+        // localStorage.setItem('employeeId', response.id);
+        // window.localStorage.setItem("id", String(this.employeeId));
+        // window.localStorage.setItem("email", this.email);
+      })
+    );
   }
 
-  logout(){
-    this.loggedIn = false;
+  saveUserData(user: any): void {
+    localStorage.setItem('user', JSON.stringify(user));
   }
+
+  getLoggedInEmployee(): Observable<any> {
+    return this.http.get<any>(`http://localhost:8081/api/employee/${this.employeeId}`);
+  }
+
+  isAuthenticated(): boolean {
+    return this.isLoggedIn;
+  }
+
+  // login(){
+  //   this.loggedIn = true;
+  // }
+
+  // logout(){
+  //   this.loggedIn = false;
+  // }
 
   // constructor(private router: Router) { }
 

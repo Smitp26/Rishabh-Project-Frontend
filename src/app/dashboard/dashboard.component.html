@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Dashboard</h2>
+  <div>
+    <h3>Generate Coupon</h3>
+    <button mat-raised-button color="primary" (click)="generateQRCode()">Generate QR Code</button>
+    <div *ngIf="showQrCode" class="qr-container">
+      <qrcode [qrdata]="qrCodeValue" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+  </div>
+</div>

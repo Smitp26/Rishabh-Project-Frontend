@@ -5,7 +5,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { OTPValidationComponent } from './otp-validation/otp-validation.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
 import { SingupComponent } from './singup/singup.component';
-import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from './services/auth.guard';
 
@@ -16,8 +15,7 @@ const routes: Routes = [
   ,{path:'otp-validation',component:OTPValidationComponent}
   ,{path:'singup',component:SingupComponent}
   ,{path:'newpassword',component:NewpasswordComponent}
-  ,{path:'changepassword',component:ChangepasswordComponent}
-  ,{path:'dashboard',component:DashboardComponent}
+  ,{path:'dashboard',component:DashboardComponent, canActivate:[authGuard]}
 ];
 
 @NgModule({
