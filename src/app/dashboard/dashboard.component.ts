@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit{
     const user = localStorage.getItem('user');
     if (user) {
       const userObj = JSON.parse(user);
-      this.employeeId = userObj.id; // Retrieve the ID from the parsed object
+      this.employeeId = userObj.id;
     } else {
       console.error('User ID not found in localStorage');
     }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { User, UserService } from '../services/user.service';
-import { SnackbarService } from '../services/snackbar.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -10,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './singup.component.html',
   styleUrls: ['./singup.component.css']
 })
+
 export class SingupComponent {
 
   hidePassword = true;
@@ -31,7 +31,7 @@ export class SingupComponent {
     if (!control.value) {
       return { required: true };
     }
-    else if (control.value !== this.signForm.controls['password'].value) {
+    else if (control.value !== this.signForm.controls['confirmPassword'].value) {
       return { confirm: true, error: true }
     }
     return {};
@@ -40,10 +40,8 @@ export class SingupComponent {
   constructor(
     private fb: FormBuilder,
     private service: UserService,
-    private formBuilder: FormBuilder,
     private router: Router,
-    private snackbarService: SnackbarService,
-  private toaster: ToastrService) { }
+    private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.signForm = this.fb.group({
@@ -61,10 +59,6 @@ export class SingupComponent {
   }
 
   register(): void {
-    if (this.signForm.invalid) {
-      this.validateAllFromFileds(this.signForm);
-      return;
-    }
 
     const user = {
       email: this.signForm.value.email,
@@ -102,16 +96,6 @@ export class SingupComponent {
     }
     return {};
   }
-  private validateAllFromFileds(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsDirty({ onlySelf: true });
-      }
-      else if (control instanceof FormGroup) {
-        this.validateAllFromFileds(control);
-      }
-    })
-  }
+  
 }
 

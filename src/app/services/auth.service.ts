@@ -10,27 +10,26 @@ import { tap } from 'rxjs';
 
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private router: Router
+  ) { }
 
-  // private loggedIn = false;
   isLoggedIn = false;
   loggedInEmployee: any = null;
   email: any = '';
   employeeId!: number;
 
-  // login(employee: any): void {
-  //   this.isLoggedIn = true;
-  //   this.loggedInEmployee = employee;
-  // }
 
-  // Simulate logout
   logout(): void {
+    localStorage.removeItem('token');
     this.isLoggedIn = false;
     this.loggedInEmployee = null;
   }
 
   login(employee: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8081/api/auth/login', employee).pipe(
+    this.loggedInEmployee = true;
+    this.loggedInEmployee = employee;
+        return this.http.post<any>('http://localhost:8081/api/auth/login', employee).pipe(
       tap(response => {
         this.isLoggedIn = true;
         this.loggedInEmployee = response;
@@ -38,9 +37,9 @@ export class AuthService {
         // this.employeeId = response.id;
         // this.email = response.email;
 
-        // localStorage.setItem('employeeId', response.id);
-        // window.localStorage.setItem("id", String(this.employeeId));
-        // window.localStorage.setItem("email", this.email);
+        localStorage.setItem('employeeId', response.id);
+        window.localStorage.setItem("id", String(this.employeeId));
+        window.localStorage.setItem("email", this.email);
       })
     );
   }
@@ -53,29 +52,16 @@ export class AuthService {
     return this.http.get<any>(`http://localhost:8081/api/employee/${this.employeeId}`);
   }
 
-  isAuthenticated(): boolean {
-    return this.isLoggedIn;
+  public isAuthenticated(): boolean{
+    
+    const token = localStorage.getItem('token');
+
+    if(!token){
+      this.router.navigate(['/']);
+      return false;
+    }
+    else{
+      return true;
+    }
   }
-
-  // login(){
-  //   this.loggedIn = true;
-  // }
-
-  // logout(){
-  //   this.loggedIn = false;
-  // }
-
-  // constructor(private router: Router) { }
-
-  // public isAuthenticated(): boolean{
-  //   const token = localStorage.getItem('token');
-
-  //   if(!token){
-  //     this.router.navigate(['/']);
-  //     return false;
-  //   }
-  //   else{
-  //     return true;
-  //   }
-  // }
 }

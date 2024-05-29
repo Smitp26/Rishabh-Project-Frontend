@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, EmailValidator, FormControl } from '@angular/forms';
-import { User, UserService } from '../services/user.service';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../services/snackbar.service';
 import { firstValueFrom } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 
 @Component({
@@ -12,50 +14,78 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent{
-  
+export class ForgotPasswordComponent {
+
   forgotFrom !: FormGroup;
   email: string = '';
-  loading:boolean = false;
+  loading: boolean = false;
 
-  constructor(private fb:FormBuilder,
+  constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private snackbar: SnackbarService,
     private toaster: ToastrService
-  ){}
-  
-  ngOnInit(): void
-  {
-    this.forgotFrom=this.fb.group({
-      email: ['',[Validators.required, 
-        Validators.email,
-        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]]          
+  ) { }
+
+  ngOnInit(): void {
+    this.forgotFrom = this.fb.group({
+      email: ['', [Validators.required,
+      Validators.email,
+      Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]]
     })
   }
-     
-  
+
+
+  // async onSubmit() {
+  //   if(this.forgotFrom.invalid){
+  //     return;
+  //   }
+
+  //   console.log(this.forgotFrom.value.email);
+  //   const email = this.forgotFrom.value.email;
+  //   try {
+  //     const res = await firstValueFrom(this.userService.sendOtp(email));
+  //     console.log(res);
+  //     this.router.navigate(['otp-validation'], { queryParams: { email } });
+  //     this.toaster.info("OTP has been sent to your email");
+  //   } catch (err) {
+  //     console.log("Error occurred", err);
+  //     //alert('Error occurred while sending OTP!');
+  //     this.toaster.error("Email doesn't exist","Error");
+  //   }
+
+  // }
+
   async onSubmit() {
-    if(this.forgotFrom.invalid){
-      return;
-    }
-
-    // this.loading = true;
-
     console.log(this.forgotFrom.value.email);
     const email = this.forgotFrom.value.email;
     try {
-      const res = await firstValueFrom(this.userService.sendOtp(email));
-      console.log(res);
-      this.router.navigate(['otp-validation'], { queryParams: { email } });
-      this.toaster.info("OTP has been sent to your email");
+        const res = await firstValueFrom(
+            this.userService.sendOtp(email).pipe(
+                catchError((error: any) => {
+                    if (error instanceof HttpErrorResponse) {
+                        if (error.status === 404) {
+                            this.toaster.error("Invalid email");
+                            return of(null); // Prevent further error handling
+                        } else {
+                            this.toaster.error("Error occurred while sending OTP!");
+                            return throwError(error);
+                        }
+                    } else {
+                        this.toaster.error("An unexpected error occurred!");
+                        return throwError(error);
+                    }
+                })
+            )
+        );
+
+        if (res && res.message === 'OTP has been sent to your email') {
+            console.log(res);
+            this.router.navigate(['otp-validation'], { queryParams: { email } });
+            this.toaster.info("OTP has been sent to your email");
+        }
     } catch (err) {
-      console.log("Error occurred", err);
-      alert('Error occurred while sending OTP!');
+        console.log("Error occurred", err);
     }
-    // finally{
-    //   this.loading = false;
-    // }
-  }
-    
+}
+
 }

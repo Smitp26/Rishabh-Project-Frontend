@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Route, Router } from '@angular/router';
-import { from } from 'rxjs';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { SnackbarService } from '../services/snackbar.service';
@@ -28,8 +27,6 @@ export class LoginComponent {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private ngxService: NgxUiLoaderService,
-    private snackbarService: SnackbarService,
     private toaster: ToastrService) { }
 
 
@@ -42,13 +39,13 @@ export class LoginComponent {
 
   onSubmit() {
     console.log(this.loginForm.value);
-    //localStorage.setItem("email", this.loginForm.value.email);
-    // localStorage.setItem("id",this.loginForm.value.id)
+    localStorage.setItem("email", this.loginForm.value.email);
+    localStorage.setItem("id",this.loginForm.value.id)
     this.userService.login(this.loginForm.value).subscribe({
-      next: (res) => { // Remove the extra '(' before 'res'
+      next: (res) => {
         console.log(res);
         this.userService.saveUserData(res.user);
-        //localStorage.setItem('email', this.loginForm.value.email);
+        localStorage.setItem('email', this.loginForm.value.email);
         if (res.userId != null) {
           const user = {
             id: res.userId,

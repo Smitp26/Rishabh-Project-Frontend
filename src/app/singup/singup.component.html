@@ -18,7 +18,7 @@
                 <input matInput placeholder="Email" id="email" formControlName="email" type="email">
                 <mat-icon matSuffix>email</mat-icon>
               </mat-form-field>
-              <div *ngIf="signForm.controls['email'].invalid && (signForm.controls['email'].dirty || signForm.controls['email'].touched)">
+              <div *ngIf="signForm.controls['email'].invalid && (signForm.controls['email'].dirty || signForm.controls['email'].touched)"  class="error-message">
                 <div *ngIf="signForm.controls['email'].errors?.['required']">Email is required.</div>
                 <div *ngIf="signForm.controls['email'].errors?.['email']">Email is invalid.</div>
               </div>
@@ -30,7 +30,7 @@
                 <input matInput placeholder="Name" id="name" formControlName="name" type="text">
                 <mat-icon matSuffix>person</mat-icon>
               </mat-form-field>
-              <div *ngIf="signForm.controls['name'].invalid && (signForm.controls['name'].dirty || signForm.controls['name'].touched)">
+              <div *ngIf="signForm.controls['name'].invalid && (signForm.controls['name'].dirty || signForm.controls['name'].touched)"  class="error-message">
                 <div *ngIf="signForm.controls['name'].errors?.['required']">Name is required.</div>
               </div>
             </div>
@@ -41,7 +41,7 @@
                 <input matInput placeholder="Password" id="password" formControlName="password" [type]="hidePassword ? 'password' : 'text'">
                 <mat-icon matSuffix class="visibility-icon" (click)="togglePasswordVisibility()">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
               </mat-form-field>
-              <div *ngIf="signForm.controls['password'].invalid && (signForm.controls['password'].dirty || signForm.controls['password'].touched)">
+              <div *ngIf="signForm.controls['password'].invalid && (signForm.controls['password'].dirty || signForm.controls['password'].touched)"  class="error-message">
                 <div *ngIf="signForm.controls['password'].errors?.['required']">Password is required.</div>
                 <div *ngIf="signForm.controls['password'].errors?.['lowercase']">Password must contain at least one lowercase letter.</div>
                 <div *ngIf="signForm.controls['password'].errors?.['uppercase']">Password must contain at least one uppercase letter.</div>
@@ -56,7 +56,7 @@
                 <input matInput placeholder="Confirm Password" id="cpassword" formControlName="cpassword" [type]="hideConfirmPassword ? 'password' : 'text'">
                 <mat-icon matSuffix class="visibility-icon" (click)="toggleConfirmPasswordVisibility()">{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
               </mat-form-field>
-              <div *ngIf="signForm.controls['cpassword'].invalid && (signForm.controls['cpassword'].dirty || signForm.controls['cpassword'].touched)">
+              <div *ngIf="signForm.controls['cpassword'].invalid && (signForm.controls['cpassword'].dirty || signForm.controls['cpassword'].touched)"  class="error-message">
                 <div *ngIf="signForm.controls['cpassword'].errors?.['required']">Confirm Password is required.</div>
                 <div *ngIf="signForm.controls['cpassword'].errors?.['confirm']">Passwords do not match.</div>
               </div>

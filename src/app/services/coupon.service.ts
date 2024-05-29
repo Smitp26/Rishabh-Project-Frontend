@@ -11,11 +11,6 @@ export class CouponService {
 
   constructor(private http: HttpClient) { }
 
-  // generateCoupon(email: string): Observable<any> {
-  //   let id = localStorage.getItem("email");
-  //   return this.http.post<any>(`${this.baseUrl}/generate?employeeId=${email}`, {});
-  // }
-
   generateCoupon(employeeId: number): Observable<any> {
     console.log(employeeId);
     return this.http.post<any>(`${this.baseUrl}/generate?employeeId=${employeeId}`, {});

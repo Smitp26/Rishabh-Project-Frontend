@@ -353,3 +353,8 @@ body.mt-0 {
   color: blue;
   text-decoration: underline;
 }
+
+.error-message{
+  color: red;
+  font-size: 15px;
+}
