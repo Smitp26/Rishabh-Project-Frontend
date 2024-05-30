@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit{
       console.error('User ID not found in localStorage');
     }
   }
-  
 
   getLoggedInEmployee() {
     this.authService.getLoggedInEmployee().subscribe({
