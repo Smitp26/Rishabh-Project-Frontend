@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, Subscription, timer } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { timer } from 'rxjs';
 import { CouponService } from '../services/coupon.service';
 import { AuthService } from '../services/auth.service';
-import { firstValueFrom } from 'rxjs';
-
 
 @Component({
   selector: 'app-dashboard',
