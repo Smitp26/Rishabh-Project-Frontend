@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { SnackbarService } from '../services/snackbar.service';
 import { StorageServiceService } from '../services/storage-service.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -40,12 +38,11 @@ export class LoginComponent {
   onSubmit() {
     console.log(this.loginForm.value);
     localStorage.setItem("email", this.loginForm.value.email);
-    localStorage.setItem("id",this.loginForm.value.id)
+
     this.userService.login(this.loginForm.value).subscribe({
       next: (res) => {
         console.log(res);
         this.userService.saveUserData(res.user);
-        localStorage.setItem('email', this.loginForm.value.email);
         if (res.userId != null) {
           const user = {
             id: res.userId,
