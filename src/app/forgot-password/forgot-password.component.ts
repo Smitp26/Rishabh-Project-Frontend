@@ -37,7 +37,6 @@ export class ForgotPasswordComponent {
   }
 
   async onSubmit() {
-    
     if (this.forgotFrom.invalid || this.loading) {
       return;
     }

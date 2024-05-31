@@ -33,9 +33,6 @@ export class AuthService {
       tap(response => {
         this.isLoggedIn = true;
         this.loggedInEmployee = response;
-        
-        // this.employeeId = response.id;
-        // this.email = response.email;
 
         localStorage.setItem('employeeId', response.id);
         window.localStorage.setItem("id", String(this.employeeId));

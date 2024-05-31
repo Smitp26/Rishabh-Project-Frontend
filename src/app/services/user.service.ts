@@ -62,10 +62,6 @@ export class UserService {
   login(loginRequest: any): Observable<any> {
     console.log("Login request", loginRequest);
     return this.httpClient.post<[]>(this.apiUrl + "/auth/login", loginRequest);
-    // return this.httpClient.post(this.url +
-    //   'api/auth/login', data,{
-    //     headers: new HttpHeaders().set('Content-Type', 'application/json'),
-    //   });
   }
 
   changePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
