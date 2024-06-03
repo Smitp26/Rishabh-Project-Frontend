@@ -14,6 +14,7 @@ export class LoginComponent {
 
   hidePassword = true;
   responseMessage = "Login Successful";
+  userName:string ='';
 
 
   toggleVisibility(): void {
@@ -48,9 +49,12 @@ export class LoginComponent {
             id: res.userId,
             role: res.userRole
           } 
+          this.userName = res.name;
+          console.log(this.userName);
           console.log(user);
           StorageServiceService.saveToken(res.jwt);
           StorageServiceService.saveUser(user);
+          localStorage.setItem('name',this.userName);
           this.toaster.success('Login Successful', 'Success');
           this.router.navigate(['/dashboard']);
         }

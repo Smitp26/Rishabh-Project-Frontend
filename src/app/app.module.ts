@@ -7,11 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { OTPValidationComponent } from './otp-validation/otp-validation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { SingupComponent } from './singup/singup.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
@@ -28,6 +26,28 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { QRCodeModule } from 'angularx-qrcode';
+import { BookingComponent } from './booking/booking.component';
+import { CouponComponent } from './coupon/coupon.component';
+import { CancelbookingComponent } from './cancelbooking/cancelbooking.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { NotificationComponent } from './notification/notification.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { QuickBookingComponent } from './quickbooking/quickbooking.component';
+import { TermsComponent } from './terms/terms.component';
+import { ViewBookingComponent } from './viewbooking/viewbooking.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { MatMenuModule } from '@angular/material/menu';
+import { QrCodeModule } from 'ng-qrcode';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SingupComponent } from './singup/singup.component';
+
 
 @NgModule({
   declarations: [
@@ -35,13 +55,31 @@ import { QRCodeModule } from 'angularx-qrcode';
     LoginComponent,
     ForgotPasswordComponent,
     OTPValidationComponent,
-    SingupComponent,
     NewpasswordComponent,
-    DashboardComponent
+    BookingComponent,
+    CouponComponent,
+    CancelbookingComponent,
+    FooterComponent,
+    HeaderComponent,
+    NotificationComponent,
+    PrivacyPolicyComponent,
+    TermsComponent,
+    ViewBookingComponent,
+    AboutusComponent,
+    ChangepasswordComponent,
+    QuickBookingComponent,
+    DashboardComponent,
+    SingupComponent
   ],
   imports: [
     BrowserModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass:'toast-top-right',
+      preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: 'decreasing'
+    }),
     AppRoutingModule,
     RouterModule,
     FormsModule,
@@ -53,16 +91,23 @@ import { QRCodeModule } from 'angularx-qrcode';
     NgbNavModule,
     HttpClientModule,
     MatDialogModule,
+    MatIconModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
     MatListModule,
     MatProgressSpinnerModule,
     NgbModule,
     QRCodeModule,
+    MatMenuModule,
+    FullCalendarModule,
     NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
     NgxUiLoaderRouterModule.forRoot({ showForeground: true }),
   ],

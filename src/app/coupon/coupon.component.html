@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+<div class="coupon-container">
+  <div class="coupon-card">
+    <div class="qr-code" *ngIf="redeemed">
+      <qrcode [qrdata]="couponCode"></qrcode>
+    </div>
+    <div class="coupon-details">
+      <p>Name: {{ name }}</p>
+      <p>ID: {{ userId }}</p>
+      <p>Date: {{ currentDate }}</p>
+      <p>Day: {{ currentDay }}</p>
+      <p *ngIf="redeemed">Coupon Code: {{ couponCode }}</p>
+      <p *ngIf="redeemed">Coupon redeemed. Valid for {{ validity }} seconds.</p>
+    </div>
+    <button (click)="redeemCoupon()">Redeem Coupon</button>
+  </div>
+</div>
+<app-footer></app-footer>
+

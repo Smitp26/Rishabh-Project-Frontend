@@ -53,7 +53,7 @@ export class ForgotPasswordComponent {
               if (error.status === 404) {
                 this.toaster.error("Invalid email");
                 this.loading = false;
-                return of(null); // Prevent further error handling
+                return of(null);
               } else {
                 this.toaster.error("Error occurred while sending OTP!");
                 this.loading = false;

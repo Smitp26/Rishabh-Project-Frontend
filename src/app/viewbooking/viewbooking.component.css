@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .calendar-card {
+    width: 600px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .calendar-container {
+    text-align: center;
+  }
+  
+  .btncancel {
+    margin-top: 20px;
+    position: relative;
+    text-align: right;
+    top: 0%;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  
+  /* Styles for booked and canceled dates */
+  ::ng-deep .mat-calendar-body-cell.booked-date .mat-calendar-body-cell-content {
+    background-color: green !important;
+    color: white !important;
+    border-radius: 50%;
+  }
+  
+  ::ng-deep .mat-calendar-body-cell.canceled-date .mat-calendar-body-cell-content {
+    background-color: red !important;
+    color: white !important;
+    border-radius: 50%;
+  }
+  

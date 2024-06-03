@@ -31,7 +31,7 @@ export class SingupComponent {
     if (!control.value) {
       return { required: true };
     }
-    else if (control.value !== this.signForm.controls['cpassword'].value) {
+    else if (control.value !== this.signForm.controls['password'].value) {
       return { confirm: true, error: true }
     }
     return {};
@@ -98,4 +98,3 @@ export class SingupComponent {
   }
   
 }
-
