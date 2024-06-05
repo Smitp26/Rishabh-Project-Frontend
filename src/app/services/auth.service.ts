@@ -21,7 +21,10 @@ export class AuthService {
 
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.clear();
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('email');
     this.isLoggedIn = false;
     this.loggedInEmployee = null;
   }
@@ -58,7 +61,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
 
     if(!token){
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
       return false;
     }
     else{

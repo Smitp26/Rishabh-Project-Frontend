@@ -20,7 +20,7 @@ const routes: Routes = [
   ,{path:'login',component:LoginComponent}
   ,{path:'forgot-password',component:ForgotPasswordComponent}
   ,{path:'otp-validation',component:OTPValidationComponent}
-  ,{path:'dashboard',component:DashboardComponent}
+  ,{path:'dashboard',component:DashboardComponent, canActivate:[authGuard]}
   ,{path:'singup',component:SingupComponent}
   ,{path:'newpassword',component:NewpasswordComponent}
   ,{path:'changepassword',component:ChangepasswordComponent}

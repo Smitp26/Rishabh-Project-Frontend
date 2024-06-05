@@ -79,5 +79,8 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('email');
+    // localStorage.removeItem('token');
   }
 }

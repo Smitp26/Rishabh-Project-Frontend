@@ -41,3 +41,26 @@
     border-radius: 50%;
   }
   
+  ::ng-deep .booked::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    width: 5px;
+    height: 10px;
+    background-color: red !important;
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+  
+  ::ng-deep .mat-calendar-body-cell.booked-date::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    width: 5px;
+    height: 5px;
+    background-color: rgb(29, 173, 24) !important;
+    border-radius: 50%;
+    transform: translateX(-50%);
+  } 

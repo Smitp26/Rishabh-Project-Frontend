@@ -75,7 +75,7 @@
                 *ngIf="signForm.controls['cpassword'].invalid && (signForm.controls['cpassword'].dirty || signForm.controls['cpassword'].touched)"
                 class="error-message">
                 <div *ngIf="signForm.controls['cpassword'].errors?.['required']">Confirm Password is required.</div>
-                <div *ngIf="signForm.controls['cpassword'].errors?.['confirm']">Passwords do not match.</div>
+<div                 *ngIf="signForm.controls['cpassword'].errors?.['confirm']">Passwords do not match.</div>
               </div>
             </div>
 
