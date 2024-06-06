@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { NotificationService } from '../services/notification.service';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +31,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -77,10 +79,14 @@ export class HeaderComponent implements OnInit {
     return user ? JSON.parse(user).name : 'User';
   }
 
-  logout(): void {
-    this.authService.logout();
-    // localStorage.removeItem('user');
-    // localStorage.removeItem('email');
-    // localStorage.removeItem('token');
+  // logout(): void {
+  //  //this.authService.logout();
+  //   localStorage.clear();
+  // }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
+    // this.authService.logout();
   }
 }

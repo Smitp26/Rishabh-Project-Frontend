@@ -40,8 +40,6 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { MatMenuModule } from '@angular/material/menu';
-import { QrCodeModule } from 'ng-qrcode';
-import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';

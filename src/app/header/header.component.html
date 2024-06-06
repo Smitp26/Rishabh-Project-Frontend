@@ -56,9 +56,11 @@
           <span routerLink="/changepassword">Change Password</span>
         </a>
        
-        <a mat-list-item routerLink="/login">
-          <mat-icon matListIcon>exit_to_app</mat-icon>
-          <span routerLink="/login" (click)="logout()">Logout</span>
+        <a mat-list-item>
+          <div (click)="logout()">
+            <mat-icon matListIcon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </div>
         </a>
        
       </mat-nav-list>

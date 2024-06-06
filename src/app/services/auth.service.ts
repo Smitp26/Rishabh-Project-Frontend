@@ -19,12 +19,9 @@ export class AuthService {
   employeeId!: number;
 
 
-
   logout(): void {
     localStorage.clear();
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('user');
-    // localStorage.removeItem('email');
+    console.log("Inside Logout");
     this.isLoggedIn = false;
     this.loggedInEmployee = null;
   }
